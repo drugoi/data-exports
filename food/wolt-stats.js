@@ -220,7 +220,7 @@ console.log(
 );
 
 console.log(
-  chalk.red("\n   Lowest Spending Month: ${lowestSpendingMonth.month}")
+  chalk.red(`\n   Lowest Spending Month: ${lowestSpendingMonth.month}`)
 );
 console.log(
   chalk.red(
