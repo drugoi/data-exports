@@ -24,6 +24,8 @@ data-exports/
 │       ├── wolt_items.json        # Recent items (last year)
 │       ├── all_wolt_orders.json   # All historical orders
 │       └── all_wolt_items.json    # All historical items
+├── utils/                  # Utility functions
+│   └── currency.js        # Currency conversion utilities
 ├── .env                    # Environment variables (gitignored)
 └── package.json           # Project dependencies
 ```
@@ -33,7 +35,7 @@ data-exports/
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/data-exports.git
+   git clone https://github.com/drugoi/data-exports.git
    cd data-exports
    ```
 
@@ -84,6 +86,41 @@ Extract and analyze your Wolt order history.
    node food/wolt-stats.js         # For recent orders
    node food/wolt-stats.js --all   # For all orders
    ```
+
+### Currency Conversion
+
+The statistics script includes currency conversion capabilities to handle orders from different countries:
+
+1. Configure base currency (optional):
+   - Edit `.env` and set your preferred base currency:
+
+     ```
+     BASE_CURRENCY=USD  # or EUR, GBP, KZT, etc.
+     ```
+
+   - If not set, defaults to KZT
+   - All amounts will be converted to this currency
+
+2. Get your Exchange Rates API key (optional):
+   - Sign up for a free account at <https://exchangeratesapi.io/>
+   - Get your API key from the dashboard
+   - Add it to `.env`:
+
+     ```
+     EXCHANGE_RATES_API_KEY=your_api_key_here
+     ```
+
+3. Features:
+   - Converts all amounts to your chosen base currency
+   - Uses historical exchange rates when available
+   - Caches exchange rates for 24 hours
+   - Falls back to cached rates if API is unavailable
+   - Works without API key using cached rates
+
+4. Without API key:
+   - The script will use cached exchange rates if available
+   - New currency conversions will be skipped
+   - You'll see a message when rates are unavailable
 
 ### Data Storage
 
